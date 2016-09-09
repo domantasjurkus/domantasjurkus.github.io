@@ -1,0 +1,153 @@
+.header {
+    background: #113;
+}
+.main-body {
+    background: #113;
+    color: #ccc;
+    padding: 30px 0;
+}
+
+body {
+	background: #CCFFFF;
+	background-image: url("https://openmerchantaccount.com/img/tiles_blue.jpg");
+    background-repeat: repeat;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#app-container {
+	display: inline-block;
+	margin: 0 auto;
+	font-family: "consolas";
+    color: black;
+    cursor: default;
+	width: 550px;
+	height: 400px;
+}
+
+/***** cat window *****/
+#main-window {
+	display: inline-block;
+	background: #66CCFF;
+	width: 400px;
+	height: 400px;
+	float: left;
+	text-align: center;
+	border-radius: 5px;
+}
+
+#cat-name {
+	/* for bouncy effetcs */
+	position: relative;
+}
+
+#img-container {
+	display: inline-block;
+	height: 250px;
+}
+
+#cat-img {
+	max-width: 380px;
+	max-height: 250px;
+}
+
+#click-counter {
+	/* for jumpy animations */
+	position: relative;
+}
+
+/***** cat list *****/
+#cat-list-container {
+	display: inline-block;
+	width: auto;
+	height: auto;
+	background: #66CCFF;
+	margin-left: 30px;
+	float: left;
+	border-radius: 5px;
+}
+
+#cat-list {
+	width: 100px;
+	text-align: center;
+	padding: 0;
+}
+
+.cat-elem {
+	/*outline:1px dashed red;*/
+    display: block;
+    width: 100%;
+	margin: 5px 0;
+    list-style-type: none;
+    cursor: pointer;
+    font-size: 1em;
+}
+.cat-elem:hover {
+	background: #77DDFF;
+}
+
+.cat-elem:active {
+	background: #AADDFF;
+}
+
+/***** admin elements *****/
+#admin-container {
+	/*outline: 1px dashed red;*/
+	display: inline-block;
+	visibility: hidden;
+}
+#admin-button {
+	display: inline-block;
+	width: 100px;
+	margin: 10px 0 0 10px;
+	text-align: center;
+	background: #EEBB55;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+#admin-button:hover {
+	background: #FFCC66;
+}
+
+#admin-form-div {
+	/*outline: 1px dashed red;*/
+	display: block;
+	margin: 10px 0 0 10px;
+}
+
+.inp {
+	display: block;
+	width: 100px;
+	margin: 3px 0;
+	padding: 3px 0;
+}
+
+#save-button {
+	text-align: center;
+	background: #99FF55;
+	padding: 5px 0;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+#save-button:hover {
+	background: #CCFF66;
+}
+
+#cancel-button {
+	text-align: center;
+	background: #EEBB55;
+	padding: 5px 0;
+	cursor: pointer;
+	border-radius: 5px;
+}
+
+#cancel-button:hover {
+	background: #FFCC66;
+}

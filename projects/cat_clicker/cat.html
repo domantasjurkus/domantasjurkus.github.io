@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cat Clicker</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/styles.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="../../js/bootstrap.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header jumbotron text-center noselect">
+            <h1><a href="../../index.html">Dom's Hub</a></h1>
+            <p>Projects and doodles by Domantas Jurkus</p>
+        </div>
+
+        <div class="main-body jumbotron text-center">
+            <div class="row">
+                <div id="app-container">
+                    <div id="main-window">
+                        <h2 id="cat-name">Cat Clicker</h2>
+                        <div id="img-container">
+                            <img id="cat-img" src="img/hamster.jpg"></img>
+                        </div>
+                        <h4 id="click-counter">Select a Cat - We'll Count the Clicks</h4>
+                    </div>
+                    
+                    <div id="cat-list-container">
+                        <ul id="cat-list"></ul>
+                    </div>
+
+                    <div id="admin-button">
+                        <h5>Admin Mode</h5>
+                    </div>
+
+                    <div id="admin-container">
+                        <div id="admin-form-div">
+                            <form id="admin-form">
+                                <input class="inp" id="inp-name" type="text" placeholder="Cat name">
+                                <input class="inp" id="inp-url" type="text" placeholder="Image URL">
+                                <input class="inp" id="inp-cnt" type="text" placeholder="Click count">
+                            </form>
+                            <div id="save-button">Save</div>
+                            <div id="cancel-button">Cancel</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <p class="text-left">
+                First MVC app. With a bit of jQuery and CSS. Select a cat, click on the image - click count increases. Yes, it's that useless.
+            </p>
+            <p class="text-left">
+                Admin mode lets you change a particular cat's name, image file URL and click count.
+            </p>
+        </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

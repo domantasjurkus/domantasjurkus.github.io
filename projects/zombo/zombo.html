@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Zombocalypso</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="../../css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../css/styles.css" rel="stylesheet">
+	<link rel="shortcut icon" href="../../images/favicon.ico">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<script src="../../js/bootstrap.js"></script>
+
+	<style>
+	body {
+		background: #200;
+		background-image: url("https://openmerchantaccount.com/img/tiles_red.jpg");
+		background-repeat: repeat;
+	}
+	#gameCanvas {
+		border-top: 1px solid #300;
+		border-left: 1px solid #300;
+		border-right: 1px solid #300;
+	}
+	#infoCanvas {
+		border-bottom: 1px solid #300;
+		border-left: 1px solid #300;
+		border-right: 1px solid #300;
+		margin-top: -5px;
+		background: #311;
+	}
+	.header {
+
+		background: #211;
+	}
+	.main-body {
+		background: #211;
+		color: #ccc;
+		padding: 30px 0;
+	}
+	</style>
+
+</head>
+
+<body>
+	<div class="container">
+		<div class="jumbotron text-center header noselect">
+			<h1><a href="../../index.html">Dom's Hub</a></h1>
+			<p>Projects and doodles by Domantas Jurkus</p>
+		</div>
+		<div class="jumbotron text-center main-body">
+			<canvas id='gameCanvas'></canvas>
+			<canvas id='infoCanvas'></canvas>
+			<br>
+			<br>
+			<br>
+		<p class="text-left">
+			A game made for 2014 Starthclyde University hackathon using vanilla HTML5 and Javascript.
+		</p>
+		<p class="text-left">
+			Objective: survive for as long as possible by evading zombies and leading them into the fires. You earn points for every zombie killed and a nice bonus for each cleared level. Sonar sound indicates a +1 teleport that can be used with spacebar.
+		</p>
+		<p class="text-left">
+			Zombie movement programmed based on player position and a bit of randomization.
+		</p>
+		<p class="text-left">
+			Known bug: the zombies sometimes cross over the flames without being burnt. Suspect a problem with array splicing when zombie count is 10+. Or maybe some of the are just fireproof, I don't know.
+		</p>
+		<p class="text-left">
+			Programming by me, graphics and music by Aigars Reiters.
+		</p>
+		</div>
+	</div>
+
+	<script src="js/helper.js"></script>
+	<script src="js/classes.js"></script>
+	<script src="js/game.js"></script>
+</body>
+</html>

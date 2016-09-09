@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dodo's Testing Inc.</title>
+    <style>
+    canvas {
+    	border: 1px solid #999;
+    	background: #eee;
+    	margin: auto;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+    }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="200">
+    </canvas>
+
+<script>
+var WIDTH = 600;
+var HEIGHT = 200;
+var ACC = 0.2;
+var BALL_COUNT = 5
+var pi = Math.PI;
+var canvas, ctx;
+var ball;
+var array = new Array();
+
+function ballType() {
+    this.r = 20;
+    this.x = Math.random()*(WIDTH-2*this.r);
+    this.y = Math.random()*(HEIGHT-2*this.r);
+    this.xspeed = (Math.random() - 0.5)*8;
+    this.yspeed = (Math.random() - 0.5)*8;
+    this.color = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+
+    this.update = function() {
+        this.yspeed += ACC;
+        this.x += this.xspeed;
+        this.y += this.yspeed;
+
+        if (this.y+2*this.r > HEIGHT || this.y < 0) {
+            var offset = this.yspeed<0 ? -this.y : HEIGHT-(this.y+2*this.r);
+            this.y += 2*offset;
+            this.yspeed *= -1;
+        }
+        if (this.x+2*this.r > WIDTH || this.x < 0) {
+            var offset = this.xspeed<0 ? -this.x : WIDTH-(this.x+2*this.r);
+            this.x += 2*offset;
+            this.xspeed *= -1;
+        }
+    },
+    this.draw = function() {
+        ctx.beginPath();
+        ctx.arc(this.x+this.r, this.y+this.r, this.r, 0, 2*pi, false);
+        ctx.closePath();
+        ctx.fillStyle = this.color;
+        ctx.fill();
+    }
+}
+
+function main() {
+    canvas = document.createElement('canvas');
+    canvas.width = WIDTH;
+    canvas.height = HEIGHT;
+    ctx = canvas.getContext('2d');
+    document.body. appendChild(canvas);
+
+    init();
+
+    var loop = function() {
+        update();
+        draw();
+
+        window.requestAnimationFrame(loop, canvas);
+    };
+    window.requestAnimationFrame(loop, canvas);
+}
+function init() {
+    for (var i = 0; i < BALL_COUNT; i++) {
+        var ball = new ballType();
+        array.push(ball);
+    }
+    console.log(array);
+}
+function update() {
+    for (var iterate in array) {
+        array[iterate].update();
+    };
+}
+function draw() {
+
+    ctx.fillStyle = '#eee';
+    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+    ctx.font='12px Helvetica';
+    ctx.textAlign='left';
+    ctx.fillStyle = '#333';
+    ctx.fillText('Bouncing Balls Demo', 10, HEIGHT-10);
+
+    for (var iterate in array) {
+        array[iterate].draw();
+    };
+}
+
+main();
+</script>
+
+</body>
+</html>

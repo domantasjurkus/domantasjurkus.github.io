@@ -1,0 +1,64 @@
+body {
+	background: #111;
+    background-image: url("https://openmerchantaccount.com/img/tiles_dark.jpg");
+    background-repeat: repeat;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* for disabling title text selection */
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.header {
+
+	background: #222;
+	color: #ccc;
+	cursor: default;
+}
+.header a {
+	text-decoration: none;
+	color: #ccc;
+}
+.header a:hover {
+	color: #fff;
+	cursor: pointer;
+}
+.main-body {
+	/*outline: 1px dashed red;*/
+	background: #222;
+	color: #aaa;
+}
+.jumbotron {
+	margin-top: 20px;
+    padding: 0.5em 0.6em;
+}
+.text {
+	margin-top: 10px;
+	padding: 0 20px;
+}
+.projects {
+	margin-bottom: 10px;
+}
+.link {
+	text-decoration: none;
+	color: #ccc;
+}
+.link:hover {
+	text-decoration: none;
+	color: #fff;
+}
+.col-sm-3 {
+	margin-top: 20px;
+}
+
+#fb-img {
+  width: 150px;
+}
+.text-left {
+  text-align: left;
+}
