@@ -24,7 +24,8 @@ var highscore;
 var isGameOver;
 var isGameKeyPressed;
 var isTeleportDone;
-var zomb_array, obst_array;
+var zomb_array
+var obst_array
 
 // graphics and sound globals
 var background, player_img_list, zombie_img_list;
