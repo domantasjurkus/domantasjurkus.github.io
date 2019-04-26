@@ -1,57 +1,11 @@
-console.log("game.js loaded");
-
-/* to-do list:
-	fix bug where zombies appear on the info canvas
-	refactor
-	add option to mute sound
-*/
-
-// constants
-var KEY_LEFT=37, KEY_UP=38, KEY_RIGHT=39, KEY_DOWN=40;
-var KEY_SPACE = 32;
-var KEY_R = 82;
-var ROWS = 19;
-var COLS = 29;
-var SQR = 30;
-var SCREEN_WIDTH = COLS*SQR;
-var SCREEN_HEIGHT = ROWS*SQR + 100;
-var INFO_HEIGHT = 100;
-var START_POS_X = Math.round(COLS/2);
-var START_POS_Y = Math.round(ROWS/2);
-var OBST_ANIM_SPEED = 12;
-
-// game globals
-var canvas, ctx, keystate, frames;
-var zombie_count, obstacle_count;
-var key_down;
-var zombies_moved;
-var step_done;
-var step_count;
-var score;
-var highscore;
-var isGameOver;
-var isGameKeyPressed;
-var isTeleportDone;
-var zomb_array, obst_array;
-
-// graphics and sound globals
-var background, player_img_list, zombie_img_list;
-var obst_img_list, obst_frame;
-var splash_img;
-var music, radar_sound, tele_sound, death_sound;
-
 function initGame(){
 	// game canvas
 	canvas = document.getElementById("gameCanvas");
 	ctx = canvas.getContext("2d");
 	canvas.width = SCREEN_WIDTH;
 	canvas.height = SCREEN_HEIGHT;
-
-	// info canvas
-	// canvas2 = document.getElementById("infoCanvas");
-	// ctx2 = canvas2.getContext("2d");
-	// canvas2.width = SCREEN_WIDTH;
-	// canvas2.height = INFO_HEIGHT;
+	ctx.width = SCREEN_WIDTH;
+	ctx.height = SCREEN_HEIGHT;
 
 	keystate = {};
 
@@ -113,15 +67,13 @@ function initGame(){
 			delete keystate[evt.keyCode];
 	});
 
-	// start the game only when all assets are loaded
 	window.onload = function() {
 		ctx.drawImage(splash_img, 0, 0);
-		// ctx2.fillRect(0, 0, SCREEN_WIDTH, INFO_HEIGHT);
-		splash();
+		splashScreen();
 	}
 }
 
-function splash(){
+function splashScreen(){
 	ctx.font = "32px Lucida console";
 	ctx.fillStyle = "red";
 	ctx.textAlign = "center";
@@ -138,7 +90,7 @@ function splash(){
 		return;
 	}
 
-	window.requestAnimationFrame(splash);
+	window.requestAnimationFrame(splashScreen);
 }
 
 function initFirstLevel(){
@@ -320,22 +272,11 @@ function step(dir){
 		initLevel();
 	}
 
-	//debugging hub
-
-	// 5 - draw
 	draw();
 }
 
 function draw(){
-	ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-	// ctx2.clearRect(0, 0, SCREEN_WIDTH, INFO_HEIGHT);
-
-	// draw HUD
-	// ctx2.font = "20px Lucida console";
-	// ctx2.fillStyle = "white";
-	// ctx2.textAlign = "left";
-	// ctx2.fillText("Teleports Remaining: " + player.tele_count, 30, 40);
-	// ctx2.fillText("Score for Teleport:  " + player.next_tele_at, 30, 75);
+	ctx.clearRect(0, 0, ctx.width, ctx.height);
 
 	// draw grid
 	for (var r=0; r<ROWS; r++){
@@ -359,18 +300,18 @@ function draw(){
 
 	// draw hud
 	ctx.fillStyle = "#311";
-	ctx.fillRect(0, SCREEN_HEIGHT-INFO_HEIGHT, SCREEN_WIDTH, INFO_HEIGHT);
+	ctx.fillRect(0, ctx.height-INFO_HEIGHT, ctx.width, INFO_HEIGHT);
 
 	ctx.font = "20px Lucida console";
 	ctx.fillStyle = "white";
 	ctx.textAlign = "left";
-	ctx.fillText("Teleports Remaining: " + player.tele_count, 30, SCREEN_HEIGHT-60);
-	ctx.fillText("Score for Teleport:  " + player.next_tele_at, 30, SCREEN_HEIGHT-25);
+	ctx.fillText("Teleports Remaining: " + player.tele_count, 30, ctx.height-60);
+	ctx.fillText("Score for Teleport:  " + player.next_tele_at, 30, ctx.height-25);
 	
 	ctx.font = "26px Lucida console";
 	ctx.textAlign = "center";
-	ctx.fillText("Score: " + score, SCREEN_WIDTH/2, SCREEN_HEIGHT-40);
-	ctx.fillText("High Score: " + highscore, SCREEN_WIDTH-150, SCREEN_HEIGHT-40);
+	ctx.fillText("Score: " + score, ctx.width/2, ctx.height-40);
+	ctx.fillText("High Score: " + highscore, ctx.width-150, ctx.height-40);
 }
 
 function gameOver(){
@@ -411,14 +352,14 @@ function gameOver(){
 	ctx.font = "32px Lucida console";
 	ctx.fillStyle = "white";
 	ctx.textAlign="center";
-	ctx.fillText("Death be upon you", SCREEN_WIDTH/2, SCREEN_HEIGHT/2-30);
+	ctx.fillText("Death be upon you", ctx.width/2, ctx.height/2-30);
 
 	ctx.font = "24px Lucida console";
 	ctx.fillStyle = "white";
 	ctx.textAlign="center";
-	ctx.fillText("Final Score: " + score, SCREEN_WIDTH/2, SCREEN_HEIGHT/2+20);
-	ctx.fillText("Final Rank: " + rank, SCREEN_WIDTH/2, SCREEN_HEIGHT/2+50);
-	ctx.fillText("Try again? Press R", SCREEN_WIDTH/2, SCREEN_HEIGHT/2+100);
+	ctx.fillText("Final Score: " + score, ctx.width/2, ctx.height/2+20);
+	ctx.fillText("Final Rank: " + rank, ctx.width/2, ctx.height/2+50);
+	ctx.fillText("Try again? Press R", ctx.width/2, ctx.height/2+100);
 
 	if (keystate[KEY_R]) {
 		initFirstLevel();

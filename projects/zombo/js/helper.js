@@ -1,5 +1,3 @@
-console.log("helper.js loaded");
-
 // cookies
 function setCookie(cname, cvalue, exdays) {
 	var d = new Date();

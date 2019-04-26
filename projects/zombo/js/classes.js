@@ -1,5 +1,3 @@
-console.log("classes.js loaded");
-
 var player = {
 	x_pos: undefined,
 	y_pos: undefined,
