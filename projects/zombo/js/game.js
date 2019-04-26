@@ -1,9 +1,9 @@
 console.log("game.js loaded");
 
 /* to-do list:
-	move the game into a single canvas
+	fix bug where zombies appear on the info canvas
+	refactor
 	add option to mute sound
-	make mobile version
 */
 
 // constants
@@ -13,9 +13,9 @@ var KEY_R = 82;
 var ROWS = 19;
 var COLS = 29;
 var SQR = 30;
-var WIDTH = COLS*SQR;
-var HEIGHT = ROWS*SQR;
-var HEIGHT2 = 100;
+var SCREEN_WIDTH = COLS*SQR;
+var SCREEN_HEIGHT = ROWS*SQR + 100;
+var INFO_HEIGHT = 100;
 var START_POS_X = Math.round(COLS/2);
 var START_POS_Y = Math.round(ROWS/2);
 var OBST_ANIM_SPEED = 12;
@@ -44,14 +44,14 @@ function initGame(){
 	// game canvas
 	canvas = document.getElementById("gameCanvas");
 	ctx = canvas.getContext("2d");
-	canvas.width = WIDTH;
-	canvas.height = HEIGHT;
+	canvas.width = SCREEN_WIDTH;
+	canvas.height = SCREEN_HEIGHT;
 
 	// info canvas
-	canvas2 = document.getElementById("infoCanvas");
-	ctx2 = canvas2.getContext("2d");
-	canvas2.width = WIDTH;
-	canvas2.height = HEIGHT2;
+	// canvas2 = document.getElementById("infoCanvas");
+	// ctx2 = canvas2.getContext("2d");
+	// canvas2.width = SCREEN_WIDTH;
+	// canvas2.height = INFO_HEIGHT;
 
 	keystate = {};
 
@@ -116,7 +116,7 @@ function initGame(){
 	// start the game only when all assets are loaded
 	window.onload = function() {
 		ctx.drawImage(splash_img, 0, 0);
-		ctx2.fillRect(0, 0, WIDTH, HEIGHT2);
+		// ctx2.fillRect(0, 0, SCREEN_WIDTH, INFO_HEIGHT);
 		splash();
 	}
 }
@@ -125,13 +125,13 @@ function splash(){
 	ctx.font = "32px Lucida console";
 	ctx.fillStyle = "red";
 	ctx.textAlign = "center";
-	ctx.fillText("Zombocalypso", WIDTH/2, HEIGHT/2-50);
+	ctx.fillText("Zombocalypso", SCREEN_WIDTH/2, SCREEN_HEIGHT/2-50);
 
 	ctx.font = "20px Lucida console";
 	ctx.fillStyle = "white";
-	ctx.fillText("move with arrow keys", WIDTH/2, HEIGHT/2+30);
-	ctx.fillText("teleport with spacebar", WIDTH/2, HEIGHT/2+60);
-	ctx.fillText("press space to play", WIDTH/2, HEIGHT/2+130);
+	ctx.fillText("move with arrow keys", SCREEN_WIDTH/2, SCREEN_HEIGHT/2+30);
+	ctx.fillText("teleport with spacebar", SCREEN_WIDTH/2, SCREEN_HEIGHT/2+60);
+	ctx.fillText("press space to play", SCREEN_WIDTH/2, SCREEN_HEIGHT/2+130);
 
 	if (keystate[KEY_SPACE]) {
 		initFirstLevel();
@@ -326,106 +326,51 @@ function step(dir){
 	draw();
 }
 
-function checkPlayerZombieCol(){
-	// if zombie reaches player
-	for (z in zomb_array){
-		if ((zomb_array[z].x_pos == player.x_pos)
-		&& (zomb_array[z].y_pos == player.y_pos)){
-			isGameOver = true;
-		}
-	}
-}
-
-function checkZombieCols(){
-	// if zombies bump into each other
-	for (var z1 = 0; z1 < zomb_array.length-1; z1++){
-		for (var z2 = z1 + 1; z2 < zomb_array.length; z2++){
-			if ((zomb_array[z1].x_pos == zomb_array[z2].x_pos)&&
-				(zomb_array[z1].y_pos == zomb_array[z2].y_pos)){
-				zomb_array.splice(z1, 1);
-				zomb_array.splice(z2, 1);
-				score += 2;
-				break;
-			}
-		}
-	}
-}
-
-function checkZombieObstacleCol(){
-	// collect the indexes of zombies that need to be deleted
-	var del_indexes = [];
-	for (var o in obst_array) {
-		for (var z in zomb_array) {
-			if ((zomb_array[z].x_pos == obst_array[o].x_pos)
-			&& (zomb_array[z].y_pos == obst_array[o].y_pos)){
-				/*del_indexes += [z];*/
-			del_indexes.push(z);
-			}
-		}
-	}
-	// delete zombies within the collected indexes
-	// looping in reverse order to prevent early length reduction
-	for (var a = del_indexes.length-1; a > -1; a--) {
-		ind = del_indexes[a];
-		zomb_array.splice(ind, 1);
-		score++;
-	}
-}
-
-function checkPlayerObstacleCol(){
-	for (var o in obst_array) {
-		if ((obst_array[o].x_pos == player.x_pos)&&(obst_array[o].y_pos == player.y_pos)) {
-			isGameOver = true;
-		}
-	}
-}
-
-function isEmpty(obj){
-	// helper function for checking if an object is empty
-    for (var prop in obj) {
-        if (obj.hasOwnProperty(prop))
-            return false;
-    }
-    return true;
-}
-
 function draw(){
-	ctx.clearRect(0, 0, WIDTH, HEIGHT);
-	ctx2.clearRect(0, 0, WIDTH, HEIGHT2);
+	ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	// ctx2.clearRect(0, 0, SCREEN_WIDTH, INFO_HEIGHT);
 
 	// draw HUD
-	ctx2.font = "20px Lucida console";
-	ctx2.fillStyle = "white";
-	ctx2.textAlign = "left";
-	ctx2.fillText("Teleports Remaining: " + player.tele_count, 30, 40);
-	ctx2.fillText("Score for Teleport:  " + player.next_tele_at, 30, 75);
-
-	ctx2.font = "26px Lucida console";
-	ctx2.textAlign = "center";
-	ctx2.fillText("Score: " + score, WIDTH/2, HEIGHT2/2);
-	ctx2.fillText("High Score: " + highscore, WIDTH-180, HEIGHT2/2);
+	// ctx2.font = "20px Lucida console";
+	// ctx2.fillStyle = "white";
+	// ctx2.textAlign = "left";
+	// ctx2.fillText("Teleports Remaining: " + player.tele_count, 30, 40);
+	// ctx2.fillText("Score for Teleport:  " + player.next_tele_at, 30, 75);
 
 	// draw grid
-	for (var r = 0; r < ROWS; r++){
-		for (var c = 0; c < COLS; c++){
+	for (var r=0; r<ROWS; r++){
+		for (var c=0; c<COLS; c++){
 			var x = c*SQR;
 			var y = r*SQR;
-
 			ctx.drawImage(background, x, y);
 		}
 	}
-	// draw player
 	player.draw();
+
 	// draw obstacles
 	for (var i in obst_array) {
 		ctx.drawImage(obst_img_list[obst_frame], obst_array[i].x_draw, obst_array[i].y_draw);
 	}
+
 	// draw zombies
 	for (var i in zomb_array) {
 		ctx.drawImage(zomb_array[i].img, zomb_array[i].x_draw, zomb_array[i].y_draw);
 	}
 
-	// debugging
+	// draw hud
+	ctx.fillStyle = "#311";
+	ctx.fillRect(0, SCREEN_HEIGHT-INFO_HEIGHT, SCREEN_WIDTH, INFO_HEIGHT);
+
+	ctx.font = "20px Lucida console";
+	ctx.fillStyle = "white";
+	ctx.textAlign = "left";
+	ctx.fillText("Teleports Remaining: " + player.tele_count, 30, SCREEN_HEIGHT-60);
+	ctx.fillText("Score for Teleport:  " + player.next_tele_at, 30, SCREEN_HEIGHT-25);
+	
+	ctx.font = "26px Lucida console";
+	ctx.textAlign = "center";
+	ctx.fillText("Score: " + score, SCREEN_WIDTH/2, SCREEN_HEIGHT-40);
+	ctx.fillText("High Score: " + highscore, SCREEN_WIDTH-150, SCREEN_HEIGHT-40);
 }
 
 function gameOver(){
@@ -439,9 +384,9 @@ function gameOver(){
 
 	// splash
 	ctx.fillStyle = "#200";
-	ctx.fillRect(WIDTH/2-195, HEIGHT/2-80, 400, 210);
+	ctx.fillRect(SCREEN_WIDTH/2-195, SCREEN_HEIGHT/2-80, 400, 210);
 	ctx.fillStyle = "#500";
-	ctx.fillRect(WIDTH/2-200, HEIGHT/2-85, 400, 210);
+	ctx.fillRect(SCREEN_WIDTH/2-200, SCREEN_HEIGHT/2-85, 400, 210);
 
 	var rank = "";
 	switch(true) {
@@ -466,14 +411,14 @@ function gameOver(){
 	ctx.font = "32px Lucida console";
 	ctx.fillStyle = "white";
 	ctx.textAlign="center";
-	ctx.fillText("Death be upon you", WIDTH/2, HEIGHT/2-30);
+	ctx.fillText("Death be upon you", SCREEN_WIDTH/2, SCREEN_HEIGHT/2-30);
 
 	ctx.font = "24px Lucida console";
 	ctx.fillStyle = "white";
 	ctx.textAlign="center";
-	ctx.fillText("Final Score: " + score, WIDTH/2, HEIGHT/2+20);
-	ctx.fillText("Final Rank: " + rank, WIDTH/2, HEIGHT/2+50);
-	ctx.fillText("Try again? Press R", WIDTH/2, HEIGHT/2+100);
+	ctx.fillText("Final Score: " + score, SCREEN_WIDTH/2, SCREEN_HEIGHT/2+20);
+	ctx.fillText("Final Rank: " + rank, SCREEN_WIDTH/2, SCREEN_HEIGHT/2+50);
+	ctx.fillText("Try again? Press R", SCREEN_WIDTH/2, SCREEN_HEIGHT/2+100);
 
 	if (keystate[KEY_R]) {
 		initFirstLevel();

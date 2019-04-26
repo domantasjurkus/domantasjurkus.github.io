@@ -17,17 +17,15 @@
 		background-repeat: repeat;
 	}
 	#gameCanvas {
-		border-top: 1px solid #300;
-		border-left: 1px solid #300;
-		border-right: 1px solid #300;
+		border: 1px solid #300;
 	}
-	#infoCanvas {
+	/* #infoCanvas {
 		border-bottom: 1px solid #300;
 		border-left: 1px solid #300;
 		border-right: 1px solid #300;
 		margin-top: -5px;
 		background: #311;
-	}
+	} */
 	.header {
 
 		background: #211;
@@ -49,7 +47,7 @@
 		</div>
 		<div class="jumbotron text-center main-body">
 			<canvas id='gameCanvas'></canvas>
-			<canvas id='infoCanvas'></canvas>
+			<!-- <canvas id='infoCanvas'></canvas> -->
 			<br>
 			<br>
 			<br>
@@ -74,5 +72,6 @@
 	<script src="js/helper.js"></script>
 	<script src="js/classes.js"></script>
 	<script src="js/game.js"></script>
+	<script src="js/collisions.js"></script>
 </body>
 </html>

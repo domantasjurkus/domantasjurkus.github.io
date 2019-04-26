@@ -21,7 +21,13 @@ function getCookie(cname) {
 	return 0;
 }
 
-
+function isEmpty(obj){
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop))
+            return false;
+    }
+    return true;
+}
 
 // input handler class
 function InputHandler() {
@@ -49,3 +55,4 @@ InputHandler.prototype.isPressed = function(code) {
 		}
 	return false;
 };
+
