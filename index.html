@@ -1,34 +1,14 @@
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Domantas Jurkus</title>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <style type="text/css">
-        body {
-            font-family: "Lato",   sans-serif;
-            margin: 40px auto;
-            max-width: 650px;
-            line-height: 1.6;
-            font-size: 18px;
-            color: #444;
-            padding: 0 10px
-        }
-        h1,
-        h2,
-        h3 {
-            line-height: 1.2
-        }
-        img {
-            border-radius: 4px;
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
-
 <body>
     <header>
-        <img src="img/header.jpg" width="186" style="float: right; margin: 20px"></img>
+        <img class="mugshot" src="img/header.jpg" width="186" style="float: right; margin: 20px"></img>
         <h1>Domantas Jurkus</h1>
     </header>
     <p>Software engineer @ Scotland — minimalist at heart, maximalist at execution, team-player in spirit.</p>
@@ -43,12 +23,8 @@
     <ul>
         <li>Profile @ <a href="https://www.linkedin.com/in/domantas-jurkus-08a259104/">LinkedIn</a></li>
         <li>Resume @ <a href="https://docs.google.com/document/d/1xnFd8Og9-EtzFLS4_UeFGU6h73pDf0yxySrq3zocQ3w/edit?usp=sharing">Google Drive</a></li>
-        <li>Arctic Code Vault Contributor @ <a href="https://github.com/domantasjurkus">GitHub</a></li>
-        <li>Hackathon portfolio @ <a href="https://devpost.com/domantasjurkus?ref_content=user-portfolio">Devpost</a></li>
-        <li>Seldom participant @ <a href="https://news.ycombinator.com/user?id=daRealDodo">Hacker News</a></li>
-        <li>Tutor @ <a href="https://www.superprof.co.uk/jack-all-trades-web-development-python-security-looking-forward-new-challenges.html">Superprof</a></li> and <a href="https://tutorful.co.uk/tutors/nnn5qwpl">Tutorful</a></li>
-        <li>Setlist collector @ <a href="https://www.setlist.fm/user/daRealDodo">setlist.fm</a></li>
     </ul>
+    <div id="badges"></div>
     <hr>
     <blockquote>
         "If the ladder is not leaning against the right wall, every step we take just gets us to the wrong place faster." - Stephen R. Covey
@@ -61,10 +37,6 @@
         <a href="projects/snake/index.html">snake</a>
         <a href="projects/pong/index.html">pong</a>
     </p>
-    <div style="display: block; float: right">
-        <img height="70" style="-webkit-user-select: none; margin: auto; display: block" style="display: block" src="https://projecteuler.net/profile/domantas.jurkus.png"> 
-        <object style="-webkit-user-select: none; margin: auto; display: block; margin: 5px 0; border-radius: 3px" data="img/hacker_org.svg" type="image/svg+xml"></object>
-    </div>
+    <script src="index.js"></script>
 </body>
-
 </html>
